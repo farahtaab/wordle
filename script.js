@@ -154,14 +154,16 @@ document.addEventListener("DOMContentLoaded", function () {
             grid.children[currentRow].classList.add("shake");
             setTimeout(() => {
                 grid.children[currentRow].classList.remove("shake");
-            }, 300);
 
-            Swal.fire({
-                title: "Error",
-                text: "Si us plau, completa la paraula abans de validar.",
-                icon: "error",
-                confirmButtonText: "D'acord"
-            });
+                Swal.fire({
+                    title: "Error",
+                    text: "Si us plau, completa la paraula abans de validar.",
+                    icon: "error",
+                    confirmButtonText: "D'acord"
+                });
+
+            }, 500); 
+
             return;
         }
 
