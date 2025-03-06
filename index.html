@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle Català</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="diccionari.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="w-100">
+            <h1 class="h3">Wordle Català</h1>
+            <div>
+                <button class="btn btn-outline-light me-2" id="btnStats">
+                    📊 Estadístiques
+                </button>
+                <button class="btn btn-outline-light me-2" id="btnHelp">
+                    ❓ Ajuda
+                </button>
+                <button class="btn btn-outline-light" id="btnRestart">
+                    🔄 Reiniciar
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container text-center">
+        <div id="letter-grid" class="mt-4"></div>
+
+        <!-- Teclado virtual en el HTML -->
+        <div id="keyboard" class="mt-4">
+            <div>
+                <button class="btn btn-secondary m-1" data-key="Q">Q</button>
+                <button class="btn btn-secondary m-1" data-key="W">W</button>
+                <button class="btn btn-secondary m-1" data-key="E">E</button>
+                <button class="btn btn-secondary m-1" data-key="R">R</button>
+                <button class="btn btn-secondary m-1" data-key="T">T</button>
+                <button class="btn btn-secondary m-1" data-key="Y">Y</button>
+                <button class="btn btn-secondary m-1" data-key="U">U</button>
+                <button class="btn btn-secondary m-1" data-key="I">I</button>
+                <button class="btn btn-secondary m-1" data-key="O">O</button>
+                <button class="btn btn-secondary m-1" data-key="P">P</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary m-1" data-key="A">A</button>
+                <button class="btn btn-secondary m-1" data-key="S">S</button>
+                <button class="btn btn-secondary m-1" data-key="D">D</button>
+                <button class="btn btn-secondary m-1" data-key="F">F</button>
+                <button class="btn btn-secondary m-1" data-key="G">G</button>
+                <button class="btn btn-secondary m-1" data-key="H">H</button>
+                <button class="btn btn-secondary m-1" data-key="J">J</button>
+                <button class="btn btn-secondary m-1" data-key="K">K</button>
+                <button class="btn btn-secondary m-1" data-key="L">L</button>
+            </div>
+            <div>
+                <button class="btn btn-danger m-1" id="btnDelete">⌫</button>
+                <button class="btn btn-secondary m-1" data-key="Z">Z</button>
+                <button class="btn btn-secondary m-1" data-key="X">X</button>
+                <button class="btn btn-secondary m-1" data-key="C">C</button>
+                <button class="btn btn-secondary m-1" data-key="V">V</button>
+                <button class="btn btn-secondary m-1" data-key="B">B</button>
+                <button class="btn btn-secondary m-1" data-key="N">N</button>
+                <button class="btn btn-secondary m-1" data-key="M">M</button>
+                <button class="btn btn-secondary m-1" data-key="Ç">Ç</button>
+                <button class="btn btn-primary m-1" id="btnEnter">⏎</button>
+            </div>
+        </div>
+        <!-- Template oculto para estadísticas -->
+        <template id="template-estadistiques">
+            <div style="text-align:left">
+                <p><strong>Nom:</strong> <span id="nom-usuari"></span></p>
+                <p><strong>Partides totals:</strong> <span id="partides-totals"></span></p>
+                <p><strong>Partides guanyades:</strong> <span id="partides-guanyades"></span></p>
+                <p><strong>Millor partida:</strong> <span id="millor-partida"></span> intents</p>
+                <p><strong>Partida més ràpida:</strong> <span id="partida-mes-rapida"></span> segons</p>
+            </div>
+        </template>
+
+        <template id="template-ajuda">
+            <p>Endevina el <b>WORDLE</b> en 6 intents.</p>
+            <p>Has d'introduir paraules de 5 lletres <a href='#' target='_blank'>que existeixin</a> i fer clic a ENTER (↵).</p>
+            <p>Després de cada intent, el color de les lletres canviarà per indicar l'evolució de la partida.</p>
+            <p>No es tenen en compte els accents a l'hora d'introduir paraules.</p>
+            <p>Es poden repetir lletres.</p>
+            <p><b>Exemples:</b></p>
+        
+            <div class="ajuda-exemple">
+                <span class="ajuda-letra correcta">P</span>
+                <span class="ajuda-letra">I</span>
+                <span class="ajuda-letra">L</span>
+                <span class="ajuda-letra">O</span>
+                <span class="ajuda-letra">T</span>
+            </div>
+            <p>La lletra <b>P</b> es troba en el lloc correcte de la paraula.</p>
+        
+            <div class="ajuda-exemple">
+                <span class="ajuda-letra">D</span>
+                <span class="ajuda-letra">O</span>
+                <span class="ajuda-letra present">T</span>
+                <span class="ajuda-letra">Z</span>
+                <span class="ajuda-letra">E</span>
+            </div>
+            <p>La paraula té la lletra <b>T</b> però en un altre lloc.</p>
+        
+            <div class="ajuda-exemple">
+                <span class="ajuda-letra">M</span>
+                <span class="ajuda-letra">A</span>
+                <span class="ajuda-letra">G</span>
+                <span class="ajuda-letra">I</span>
+                <span class="ajuda-letra absent">C</span>
+            </div>
+            <p>La paraula no conté la lletra <b>C</b>.</p>
+        </template>        
+
+        <template id="template-formulari-inicial">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p style="font-size: 16px; color: #555;">Introdueix les teves dades per començar a jugar.</p>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="nom"
+                    style="display: block; text-align: left; font-weight: bold; margin-bottom: 5px;">Nom</label>
+                <input type="text" id="nom" class="form-control" placeholder="Escriu el teu nom"
+                    style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <small id="nomError" class="text-danger" style="display: none; color: red; font-size: 12px;">El nom és
+                    obligatori.</small>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="cognom"
+                    style="display: block; text-align: left; font-weight: bold; margin-bottom: 5px;">Cognom</label>
+                <input type="text" id="cognom" class="form-control" placeholder="Escriu el teu cognom"
+                    style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <small id="cognomError" class="text-danger" style="display: none; color: red; font-size: 12px;">El
+                    cognom és obligatori.</small>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="email"
+                    style="display: block; text-align: left; font-weight: bold; margin-bottom: 5px;">Correu
+                    electrònic</label>
+                <input type="email" id="email" class="form-control" placeholder="Escriu el teu correu electrònic"
+                    style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <small id="emailError" class="text-danger"
+                    style="display: none; color: red; font-size: 12px;">Introdueix un correu vàlid.</small>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="telefon"
+                    style="display: block; text-align: left; font-weight: bold; margin-bottom: 5px;">Telèfon</label>
+                <input type="text" id="telefon" class="form-control" placeholder="Escriu el teu telèfon (9 xifres)"
+                    style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <small id="telefonError" class="text-danger" style="display: none; color: red; font-size: 12px;">El
+                    telèfon ha de tenir exactament 9 xifres.</small>
+            </div>
+        </template>
+
+    </div>
+
+    <footer>
+        <p>Wordle Català © 2024</p>
+    </footer>
+
+</body>
+
+</html>

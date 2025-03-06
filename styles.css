@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Fredoka:wght@500&display=swap');
+
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #8ecae6;
+    --correct-color: #76c893;
+    --present-color: #ffb703;
+    --absent-color: #e0e0e0;
+    --text-dark: #2a2a2a;
+    --text-light: #ffffff;
+    --border-color: #d6d6d6;
+    --background-light: #f9f9f9;
+    --background-form: #f1f9ff;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    padding: 10px 0;
+    width: 100%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 22px;
+    margin: 0;
+}
+
+nav button {
+    background: var(--text-light);
+    color: var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+nav button:hover {
+    background: var(--secondary-color);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    padding: 10px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#letter-grid {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
+    margin: 10px 0;
+    width: 280px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.cell {
+    width: 55px;
+    height: 50px;
+    background-color: var(--text-light);
+    border: 2px solid var(--border-color);
+    color: var(--text-dark);
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.cell.filled {
+    animation: bounceIn 0.2s ease forwards;
+}
+
+.cell.correct {
+    background-color: var(--correct-color);
+    color: var(--text-light);
+    border-color: var(--correct-color);
+}
+
+.cell.present {
+    background-color: var(--present-color);
+    color: var(--text-dark);
+    border-color: var(--present-color);
+}
+
+.cell.absent {
+    background-color: var(--absent-color);
+    color: var(--text-dark);
+    border-color: var(--absent-color);
+}
+
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+#keyboard div {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+#keyboard button {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 8px;
+    min-width: 36px;
+    height: 44px;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#keyboard button:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+#btnEnter, #btnDelete {
+    background-color: var(--correct-color);
+    color: var(--text-light);
+    min-width: 70px;
+}
+
+#btnEnter:hover, #btnDelete:hover {
+    background-color: #5aa75a;
+}
+
+#keyboard button.correct {
+    background-color: var(--correct-color);
+    color: var(--text-light);
+}
+
+#keyboard button.present {
+    background-color: var(--present-color);
+    color: var(--text-dark);
+}
+
+#keyboard button.absent {
+    background-color: var(--absent-color);
+    color: var(--text-dark);
+}
+
+#template-formulari-inicial {
+    background-color: var(--background-form);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+#template-formulari-inicial label {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+#template-formulari-inicial input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.swal2-popup {
+    font-family: 'Quicksand', sans-serif !important;
+    background-color: #fff !important;
+    border-radius: 10px !important;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+footer {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    width: 100%;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#template-ajuda {
+    font-size: 14px;
+    color: #333;
+}
+
+#template-ajuda p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+#template-ajuda a {
+    color: var(--primary-color, #8B0000);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.ajuda-exemple {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    gap: 4px;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+.ajuda-letra {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #333;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #fff;
+}
+
+.ajuda-letra.correcta {
+    background-color: #6A994E; /* Verde */
+    color: #fff;
+    border-color: #6A994E;
+}
+
+.ajuda-letra.present {
+    background-color: #E76F51; /* Naranja */
+    color: #fff;
+    border-color: #E76F51;
+}
+
+.ajuda-letra.absent {
+    background-color: #D8D8D8; /* Gris */
+    color: #333;
+    border-color: #D8D8D8;
+}
+
+@media (max-width: 576px) {
+    #keyboard button {
+        min-width: 32px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
