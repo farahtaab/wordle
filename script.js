@@ -115,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Activar el teclat físic
         document.addEventListener("keydown", handleKeyDown);
-
     }
 
     // Funció per crear la cuadrícula de lletres
@@ -196,9 +195,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (lletra === paraulaOculta[i]) encerts++;
         }
 
-        if (encerts === maxCols) {
+        if (encerts == maxCols) {
             finalitzarPartida(true);
-        } else if (++currentRow === maxRows) {
+        } else if (++currentRow == maxRows) {
             finalitzarPartida(false);
         }
         currentCol = 0;

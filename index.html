@@ -33,7 +33,6 @@
     <div class="container text-center">
         <div id="letter-grid" class="mt-4"></div>
 
-        <!-- Teclado virtual en el HTML -->
         <div id="keyboard" class="mt-4">
             <div>
                 <button class="btn btn-secondary m-1" data-key="Q">Q</button>
@@ -71,7 +70,6 @@
                 <button class="btn btn-primary m-1" id="btnEnter">⏎</button>
             </div>
         </div>
-        <!-- Template oculto para estadísticas -->
         <template id="template-estadistiques">
             <div style="text-align:left">
                 <p><strong>Nom:</strong> <span id="nom-usuari"></span></p>
@@ -84,12 +82,13 @@
 
         <template id="template-ajuda">
             <p>Endevina el <b>WORDLE</b> en 6 intents.</p>
-            <p>Has d'introduir paraules de 5 lletres <a href='#' target='_blank'>que existeixin</a> i fer clic a ENTER (↵).</p>
+            <p>Has d'introduir paraules de 5 lletres <a href='#' target='_blank'>que existeixin</a> i fer clic a ENTER
+                (↵).</p>
             <p>Després de cada intent, el color de les lletres canviarà per indicar l'evolució de la partida.</p>
             <p>No es tenen en compte els accents a l'hora d'introduir paraules.</p>
             <p>Es poden repetir lletres.</p>
             <p><b>Exemples:</b></p>
-        
+
             <div class="ajuda-exemple">
                 <span class="ajuda-letra correcta">P</span>
                 <span class="ajuda-letra">I</span>
@@ -98,7 +97,7 @@
                 <span class="ajuda-letra">T</span>
             </div>
             <p>La lletra <b>P</b> es troba en el lloc correcte de la paraula.</p>
-        
+
             <div class="ajuda-exemple">
                 <span class="ajuda-letra">D</span>
                 <span class="ajuda-letra">O</span>
@@ -107,7 +106,7 @@
                 <span class="ajuda-letra">E</span>
             </div>
             <p>La paraula té la lletra <b>T</b> però en un altre lloc.</p>
-        
+
             <div class="ajuda-exemple">
                 <span class="ajuda-letra">M</span>
                 <span class="ajuda-letra">A</span>
@@ -116,7 +115,7 @@
                 <span class="ajuda-letra absent">C</span>
             </div>
             <p>La paraula no conté la lletra <b>C</b>.</p>
-        </template>        
+        </template>
 
         <template id="template-formulari-inicial">
             <div style="text-align: center; margin-bottom: 20px;">
